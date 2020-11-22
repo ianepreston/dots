@@ -1,0 +1,2 @@
+DOTFILES_DIRS="$HOME/.dotfiles/rcs $HOME/.private_dotfiles/rcs"
+TAGS="linux arch home"
