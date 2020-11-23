@@ -4,11 +4,6 @@ export PROMPT_DIRTRIM=4
 
 GIT_PS1_USEGIT=0
 
-if [[ -e /usr/lib/git-core/git-sh-prompt ]]; then
-  source '/usr/lib/git-core/git-sh-prompt'
-  GIT_PS1_USEGIT=1
-fi
-
 if [[ -e /usr/lib/git/git-core/git-sh-prompt ]]; then
   source '/usr/lib/git/git-core/git-sh-prompt'
   GIT_PS1_USEGIT=1
@@ -43,16 +38,16 @@ function custom_prompt() {
     local ssh_text="${color_cyan}(SSH) "
   fi
 
-  # shellcheck disable=SC2154
-  local curShell="${color_blue}("
-  if [[ $IS_WSL == "true" ]]; then
-    curShell+="WSL "
-  fi
-  if [[ "$0" == "-bash" ]] || [[ "$0" == "/bin/bash" ]]; then
-    curShell+="bash)"
-  else
-    curShell+="$0)"
-  fi
+#  # shellcheck disable=SC2154
+#  local curShell="${color_blue}("
+#  if [[ $IS_WSL == "true" ]]; then
+#    curShell+="WSL "
+#  fi
+#  if [[ "$0" == "-bash" ]] || [[ "$0" == "/bin/bash" ]]; then
+#    curShell+="bash)"
+#  else
+#    curShell+="$0)"
+#  fi
 
   if [[ $GIT_PS1_USEGIT -eq 1 ]]; then
     local git_part
