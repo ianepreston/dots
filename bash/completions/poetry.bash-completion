@@ -145,4 +145,4 @@ _poetry_b702f0cce29acd08_complete()
 }
 
 complete -o default -F _poetry_b702f0cce29acd08_complete poetry
-complete -o default -F _poetry_b702f0cce29acd08_complete /home/ipreston/.poetry/bin/poetry
+complete -o default -F _poetry_b702f0cce29acd08_complete /home/brennan/.poetry/bin/poetry
