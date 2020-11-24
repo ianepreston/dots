@@ -7,17 +7,18 @@ IFS=$'\n\t'
 
 DOTFILES="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck source=/home/brennan/.dotfiles/bash/base-colors.bash
+# Bring in helper functions to colour text and check for program existence
 source "$DOTFILES/bash/base-colours.bash"
-# shellcheck source=/home/brennan/.dotfiles/bash/base-functions.bash
 source "$DOTFILES/bash/base-functions.bash"
 
+# From base-functions. Set environment variables for OS. e.g. primary OS = Linux, secondary = Arch
 SetOsEnvironmentVariables
 
 echo ""
 echo -e "${color_green}Starting setup...${color_normal}"
 echo ""
 
+# We need RCM for obvious reasons. Curl is used to pull in user installs for plugins etc.
 if ! command_exists rcup; then
   echo -e "${color_red}RCM is not installed.  Please install it and try again.${color_normal}"
   exit 1
@@ -28,6 +29,9 @@ if ! command_exists curl; then
   exit 1
 fi
 
+# If there's already an rcrc for this host in either repository then link it in
+# This file has to be in place before we can load the rest of the setup in order to
+# apply the correct tags and look in the correct places for dotfiles
 rcup -f -K -d "$HOME/.dotfiles/rcs" -d "$HOME/.private_dotfiles/rcs" rcrc
 
 if [[ -f "$HOME/.rcrc" ]]; then
