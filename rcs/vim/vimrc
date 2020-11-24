@@ -1,4 +1,17 @@
+scriptencoding utf-8
+
+" https://vi.stackexchange.com/questions/22944/how-to-keep-defaults-yet-make-customization
+unlet! skip_defaults_vim
+silent! source $VIMRUNTIME/defaults.vim
+
+"https://vi.stackexchange.com/questions/9455/why-should-i-use-augroup
+augroup vimStartup
+  au!
+augroup END
+
+
 " Set up vertical vs block cursor for insert/normal mode
+" https://vi.stackexchange.com/questions/7306/vim-normal-and-insert-mode-cursor-not-changing-in-gnu-screen
 if &term =~ "screen."
     let &t_ti.="\eP\e[1 q\e\\"
     let &t_SI.="\eP\e[5 q\e\\"
@@ -11,45 +24,36 @@ else
     let &t_te.="\<Esc>[0 q"
 endif
 
-syntax on
+"https://www.cyberciti.biz/faq/turn-on-or-off-color-syntax-highlighting-in-vi-or-vim/
+"https://stackoverflow.com/questions/33380451/is-there-a-difference-between-syntax-on-and-syntax-enable-in-vimscript/33380495
+syntax enable
 
+"https://vim.fandom.com/wiki/Disable_beeping
 set noerrorbells
+
+"https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set nu rnu
+
+set relativenumber  " set realtive numbers to show
+set number " also display the line number of the current line
+
+"http://vimcasts.org/episodes/soft-wrapping-text/
+"http://vimdoc.sourceforge.net/htmldoc/diff.html
+set linebreak
 set nowrap
+if &diff
+  set wrap
+endif
+
+"https://vim.fandom.com/wiki/Searching
+set ignorecase
 set smartcase
-set noswapfile
-set undodir=~/.vim/undodir
-set undofile
-set incsearch
 
+"http://joshorourke.com/2012/06/29/vim-tip-how-to-use-vertical-guides
 set colorcolumn=88
-highlight Colorcolumn ctermbg=0 guibg=lightgrey
 
-call plug#begin('~/.vim/plugged')
-Plug 'dracula/vim',{'as':'dracula'}
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'git@github.com:Valloric/YouCompleteMe.git'
-Plug 'mbbill/undotree'
-call plug#end()
-
-syntax enable
-colorscheme dracula
-
-let mapleader = " "
-
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
-
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
+"https://vim.fandom.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
+set scrolloff=4
