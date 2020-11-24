@@ -48,7 +48,7 @@ if [[ $IS_WSL == "true" ]]; then
 fi
 
 # Load bash completions
-for file in $DOTFILES/bash/completions/*.bash; do
+for file in $DOTFILES/bash/completions/*.{bash,bash-completion}; do
   # shellcheck source=/dev/null
   source "$file"
 done
