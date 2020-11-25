@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# If poetry is not installed download the installer and run it
+if [[ ! -d $HOME/.poetry ]]; then
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+fi

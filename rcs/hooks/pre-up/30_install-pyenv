@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# If pyenv is not installed download and run the installer
+if [[ ! -d $HOME/.pyenv ]]; then
+    curl https://pyenv.run | bash
+fi

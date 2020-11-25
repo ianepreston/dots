@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [[ -f $HOME/.vim/plugged/YouCompleteMe/install.py ]]; then
+  python $HOME/.vim/plugged/YouCompleteMe/install.py
+fi
