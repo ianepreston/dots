@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+pip_checker() {
+  pip3 list --format=columns --user| grep -q $1
+}
+
+if ! pip_checker "pipx"; then
+  echo "Installing pipx"
+  python3 -m pip install --user pipx
+fi
