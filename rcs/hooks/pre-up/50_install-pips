@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# If poetry is not installed download the installer and run it
+
+pipx_checker() {
+  pipx list | grep -q $1
+}
+
+if ! pipx_checker "poetry"; then
+  echo "Installing poetry"
+  pipx install poetry
+fi
+
+if ! pipx_checker "nox"; then
+  echo "Installing nox"
+  pipx install nox
+fi
