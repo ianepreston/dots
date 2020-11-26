@@ -45,7 +45,26 @@ function custom_prompt() {
     # shellcheck disable=SC2154
     local exit_status="${color_red}${i_fa_close} (\$?)"
   fi
-
+  # Figure out and display which python is currently active
+  local whichpy=$(which python)
+  if [[ $whichpy == *"miniconda"* ]];
+  then
+      local pypart="${color_white}(conda: $CONDA_DEFAULT_ENV)"
+  elif [[ $whichpy == *"pyenv"* ]];
+  then
+      local whichshim=$(pyenv version | awk '{print $1}')
+      if [[ $whichshim == "system" ]];
+      then
+          local pypart="${color_white}(system python)"
+      else
+          local pypart="${color_white}(pyenv: $whichshim)"
+      fi
+  elif [[ $whichpy == "/usr/bin/"* ]];
+  then
+      local pypart="${color_white}(system python)"
+  else
+      local pypart="${color_white}(unknown python)"
+  fi
   # Indicate if we're accessing the machine via SSH
   local ssh_text=""
   if [[ -n $SSH_CLIENT ]]; then
@@ -73,9 +92,9 @@ function custom_prompt() {
     git_part=$(__git_ps1 "${color_yellow}[%s] ")
     export PS1
     # shellcheck disable=SC2154
-    PS1="${color_normal}\n${ssh_text}${color_green}\u@\h ${color_purple}\w ${git_part}${curShell} ${exit_status} ${color_normal}\n\$ "
+    PS1="${color_normal}\n${pypart} ${ssh_text}${color_green}\u@\h ${color_purple}\w ${git_part}${curShell} ${exit_status} ${color_normal}\n\$ "
   else
-    export PS1="${color_normal}\n${ssh_text}${color_green}\u@\h ${color_purple}\w ${curShell} ${exit_status} ${color_normal}\n\$ "
+    export PS1="${color_normal}\n${pypart} ${ssh_text}${color_green}\u@\h ${color_purple}\w ${curShell} ${exit_status} ${color_normal}\n\$ "
   fi
 }
 
