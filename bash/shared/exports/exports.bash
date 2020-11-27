@@ -33,6 +33,7 @@ export LESSEDIT='vim'
 export VISUAL='vim'
 if command_exists code; then
   export VISUAL='code'
+fi
 
 # Pager
 export PAGER="less"
@@ -70,3 +71,4 @@ export HISTFILE=~/.cache/bash_history
 
 # Suffixes to ignore for filename completion
 export FIGNORE=".git:.DS_Store"
+
