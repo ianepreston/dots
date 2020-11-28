@@ -63,7 +63,6 @@ Plug 'roxma/vim-tmux-clipboard'           " Seamless integration for vim and tmu
 Plug 'radenling/vim-dispatch-neovim'      " Native neovim terminal support for Dispatch
 Plug 'godlygeek/tabular'                  " Tools for aligning text
 Plug 'ntpeters/vim-better-whitespace'     " Trailing whitespace highlighting
-Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }  " Color previewer
 Plug 'reedes/vim-pencil'                  " Tools for working with prose (text, markdown)
 Plug 'kana/vim-textobj-user'              " Used by other plugins to define text objects
 Plug 'reedes/vim-textobj-sentence'        " A better 'sentence' text object for prose.
