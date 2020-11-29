@@ -16,3 +16,5 @@ pipx_installer() {
 }
 
 pipx_installer nox
+pipx_installer cookiecutter
+pipx_installer pre-commit
