@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# If pyenv is not installed download and run the installer
+if [[ ! -d $HOME/.poetry ]]; then
+  wget https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -O ~/get-poetry.py
+  python3 ~/get-poetry.py --no-modify-path
+  rm ~/get-poetry.py
+fi
