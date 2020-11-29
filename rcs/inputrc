@@ -57,7 +57,10 @@ TAB: menu-complete
 # 'Magic Space'
 # Insert a space character then performs a history expansion
 # in the line
-Space: magic-space
+# https://superuser.com/questions/1461096/spacebar-doesnt-work-in-python-shell-or-pdb
+$if Bash
+  Space: magic-space
+$endif
 
 ###### History settings
 set revert-all-at-newline on
