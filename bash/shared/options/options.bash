@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# https://tldp.org/LDP/abs/html/options.html
+
 # Set bash to vi line edit mode
 set -o vi
 
