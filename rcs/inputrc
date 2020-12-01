@@ -71,10 +71,10 @@ set revert-all-at-newline on
 set bell-style visible
 
 # Use Vi style editing (not Emacs)
-set editing-mode vi
-set show-mode-in-prompt on
-set vi-ins-mode-string "+"
-set vi-cmd-mode-string ":"
+# set editing-mode vi
+# set show-mode-in-prompt on
+# set vi-ins-mode-string "+"
+# set vi-cmd-mode-string ":"
 
 $include ~/.inputrc.os
 $include ~/.inputrc.local

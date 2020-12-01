@@ -3,7 +3,7 @@
 # https://tldp.org/LDP/abs/html/options.html
 
 # Set bash to vi line edit mode
-set -o vi
+# set -o vi
 
 # Don't use ^D to exit
 # set -o ignoreeof
