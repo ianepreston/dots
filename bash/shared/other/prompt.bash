@@ -6,10 +6,15 @@ export PROMPT_DIRTRIM=4
 # Default to not using git, detect if we can use it below
 GIT_PS1_USEGIT=0
 
-# Two possible places for git prompt, as long as we have it in one
+# Three possible places for git prompt, as long as we have it in one
 # we're good.
 if [[ -e /usr/lib/git/git-core/git-sh-prompt ]]; then
   source '/usr/lib/git/git-core/git-sh-prompt'
+  GIT_PS1_USEGIT=1
+fi
+
+if [[ -e /usr/lib/git-core/git-sh-prompt ]]; then
+  source '/usr/lib/git-core/git-sh-prompt'
   GIT_PS1_USEGIT=1
 fi
 
