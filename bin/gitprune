@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Delete any local branches that have been removed from the remote repository
+# Useful for after you close a bunch of PRs
+
+git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d
