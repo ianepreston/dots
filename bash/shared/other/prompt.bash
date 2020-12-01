@@ -45,65 +45,65 @@ function custom_prompt() {
   local last_exit=$?
   if [[ $last_exit -eq 0 ]]; then
     # shellcheck disable=SC2154
-    local exit_status="${color_green}${i_fa_check}"
+    local exit_status="${color_green}[${i_fa_check}]"
   else
     # shellcheck disable=SC2154
-    local exit_status="${color_red}${i_fa_close} (\$?)"
+    local exit_status="${color_red}[${i_fa_close} (\$?)]"
   fi
   # Figure out and display which python is currently active
   local whichpy=$(which python)
   if [[ $whichpy == *"miniconda"* ]];
   then
-      local pypart="${color_white}(conda: $CONDA_DEFAULT_ENV)"
+      local pypart="${color_white}[conda: $CONDA_DEFAULT_ENV]"
   elif [[ $whichpy == *"pyenv"* ]];
   then
       local whichshim=$(pyenv version | awk '{print $1}')
       if [[ $whichshim == "system" ]];
       then
-          local pypart="${color_white}(system python)"
+          local pypart="${color_white}[system python]"
       else
-          local pypart="${color_white}(pyenv: $whichshim)"
+          local pypart="${color_white}[pyenv: $whichshim]"
       fi
   elif [[ $whichpy == *"pypoetry"* ]];
   then
     poetry_env=$(echo $whichpy | sed 's/.*pypoetry\/virtualenvs\/\(.*\)\/bin.*/\1/')
-    local pypart="${color_white}(poetry: $poetry_env)"
+    local pypart="${color_white}[poetry: $poetry_env]"
   elif [[ $whichpy == "/usr/bin/"* ]];
   then
-      local pypart="${color_white}(system python)"
+      local pypart="${color_white}[system python]"
   else
-      local pypart="${color_white}(unknown python)"
+      local pypart="${color_white}[unknown python]"
   fi
   # Indicate if we're accessing the machine via SSH
   local ssh_text=""
   if [[ -n $SSH_CLIENT ]]; then
     # shellcheck disable=SC2154
-    local ssh_text="${color_cyan}(SSH) "
+    local ssh_text="${color_cyan}[SSH]"
   fi
 
 
   # shellcheck disable=SC2154
   # Indicate what kind of shell we're in
-  local curShell="${color_blue}("
+  local curShell="${color_blue}["
   if [[ $IS_WSL == "true" ]]; then
     curShell+="WSL "
   fi
   if [[ "$0" == "-bash" ]] || [[ "$0" == "/bin/bash" ]]; then
-    curShell+="bash)"
+    curShell+="bash]"
   else
-    curShell+="$0)"
+    curShell+="$0]"
   fi
 
   # Actually build the prompt
   if [[ $GIT_PS1_USEGIT -eq 1 ]]; then
     local git_part
     # shellcheck disable=SC2154
-    git_part=$(__git_ps1 "${color_yellow}[%s] ")
+    git_part=$(__git_ps1 "${color_yellow}[%s]${color_normal}-")
     export PS1
     # shellcheck disable=SC2154
-    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]-${color_purple}[\w]-${git_part}-${curShell}-${exit_status}${color_yellow}  \n${color_normal}└─\$ "
+    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${git_part}${curShell}-${exit_status}${color_yellow}  \n${color_normal}└─>\$ "
   else
-    export PS1="${color_normal}\n┌─${pypart} ${ssh_text}${color_green}\u@\h ${color_purple}\w ${curShell} ${exit_status} ${color_normal}\n\$ "
+    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${curShell}-${exit_status}${color_yellow}  \n${color_normal}└─>\$ "
   fi
 }
 
