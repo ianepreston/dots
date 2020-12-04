@@ -16,7 +16,7 @@ export LC_ALL="en_CA.UTF-8"
 export TZ="America/Mountain"
 
 # Set terminal
-export TERM=kitty
+export TERM=xterm
 
 # Turn on colors
 export CLICOLOR=1
