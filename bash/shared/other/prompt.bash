@@ -101,9 +101,9 @@ function custom_prompt() {
     git_part=$(__git_ps1 "${color_yellow}[%s]${color_normal}-")
     export PS1
     # shellcheck disable=SC2154
-    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${git_part}${curShell}-${exit_status}${color_yellow}  \n${color_normal}└─>\$ "
+    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${git_part}${curShell}-${exit_status}${color_yellow} ${color_normal} \n└─>\$ "
   else
-    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${curShell}-${exit_status}${color_yellow}  \n${color_normal}└─>\$ "
+    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${curShell}-${exit_status}${color_yellow} ${color_normal} \n└─>\$ "
   fi
 }
 
