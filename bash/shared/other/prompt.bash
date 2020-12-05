@@ -64,10 +64,10 @@ function custom_prompt() {
       else
           local pypart="${color_white}[pyenv: $whichshim]"
       fi
-  elif [[ $whichpy == *"pypoetry"* ]];
+  elif [[ "$VIRTUAL_ENV" != "" ]];
   then
-    poetry_env=$(echo $whichpy | sed 's/.*pypoetry\/virtualenvs\/\(.*\)\/bin.*/\1/')
-    local pypart="${color_white}[poetry: $poetry_env]"
+    # poetry_env=$(echo $whichpy | sed 's/.*pypoetry\/virtualenvs\/\(.*\)\/bin.*/\1/')
+    local pypart="${color_white}[ $VIRTUAL_ENV ]"
   elif [[ $whichpy == "/usr/bin/"* ]];
   then
       local pypart="${color_white}[system python]"
