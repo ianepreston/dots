@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# If poetry is not installed download and run the installer
+# Have to do it with the script because of this issue:
+# https://github.com/python-poetry/poetry/issues/651
+if [[ ! -d $HOME/.poetry ]]; then
+  wget https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -O ~/get-poetry.py
+  python3 ~/get-poetry.py --no-modify-path
+  rm ~/get-poetry.py
+fi

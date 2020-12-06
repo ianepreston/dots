@@ -1,0 +1,8 @@
+# https://docs.github.com/en/free-pro-team@latest/github/using-git/ignoring-files#configuring-ignored-files-for-all-repositories-on-your-computer
+log
+tmp
+vendor
+.git/
+bower_components/
+node_modules/
+*.vscode/*

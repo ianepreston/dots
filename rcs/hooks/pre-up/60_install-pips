@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# If poetry is not installed download the installer and run it
+
+pipx_checker() {
+  # Check if a tool is installed with pipx
+  pipx list | grep -q $1
+}
+
+pipx_installer() {
+  # Install a tool with pipx
+  if ! pipx_checker $1; then
+    echo "Installing $1"
+    pipx install $1
+  fi
+}
+
+pipx_installer nox
+pipx_installer cookiecutter
+pipx_installer pre-commit
