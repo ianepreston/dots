@@ -78,7 +78,7 @@ function custom_prompt() {
   local ssh_text=""
   if [[ -n $SSH_CLIENT ]]; then
     # shellcheck disable=SC2154
-    local ssh_text="${color_cyan}[SSH]"
+    local ssh_text="${color_cyan}[SSH]${color_normal}-"
   fi
 
 
@@ -101,9 +101,9 @@ function custom_prompt() {
     git_part=$(__git_ps1 "${color_yellow}[%s]${color_normal}-")
     export PS1
     # shellcheck disable=SC2154
-    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${git_part}${curShell}-${exit_status}${color_yellow} ${color_normal} \n└─>\$ "
+    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]${color_normal}-${git_part}${curShell}${color_normal}-${exit_status}${color_normal} \n└─>\$ "
   else
-    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]-${curShell}-${exit_status}${color_yellow} ${color_normal} \n└─>\$ "
+    PS1="${color_normal}\n┌─${pypart}-${ssh_text}${color_green}[\u@\h]${color_normal}-${color_purple}[\w]${color_normal}-${curShell}${color_normal}-${exit_status}${color_normal} \n└─>\$ "
   fi
 }
 
