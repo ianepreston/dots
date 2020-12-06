@@ -12,23 +12,24 @@ augroup END
 
 " Set up vertical vs block cursor for insert/normal mode
 " https://vi.stackexchange.com/questions/7306/vim-normal-and-insert-mode-cursor-not-changing-in-gnu-screen
-if &term =~ "screen."
-    let &t_ti.="\eP\e[1 q\e\\"
-    let &t_SI.="\eP\e[5 q\e\\"
-    let &t_EI.="\eP\e[1 q\e\\"
-    let &t_te.="\eP\e[0 q\e\\"
-else
-    let &t_ti.="\<Esc>[1 q"
-    let &t_SI.="\<Esc>[5 q"
-    let &t_EI.="\<Esc>[1 q"
-    let &t_te.="\<Esc>[0 q"
-endif
+" if &term =~ "screen.*"
+"     let &t_ti.="\eP\e[1 q\e\\"
+"     let &t_SI.="\eP\e[5 q\e\\"
+"     let &t_EI.="\eP\e[1 q\e\\"
+"     let &t_te.="\eP\e[0 q\e\\"
+" else
+"     let &t_ti.="\<Esc>[1 q"
+"     let &t_SI.="\<Esc>[5 q"
+"     let &t_EI.="\<Esc>[1 q"
+"     let &t_te.="\<Esc>[0 q"
+" endif
 
 " Load my plugins
 if filereadable(expand('~/.vim/vimrc.bundles'))
   source ~/.vim/vimrc.bundles
 endif
 
+" https://vim.fandom.com/wiki/Working_with_Unicode
 if has('multi_byte')
   if &termencoding == ''
     let &termencoding = &encoding
@@ -39,85 +40,114 @@ if has('multi_byte')
   set fileencodings=ucs-bom,utf-8,latin1
 endif
 
+" https://medium.com/usevim/vim-101-what-is-the-leader-key-f2f5c1fa610f
 let mapleader = ","
+" https://learnvimscriptthehardway.stevelosh.com/chapters/06.html#local-leader
 let maplocalleader = "\\"
 
+" https://vi.stackexchange.com/questions/5055/why-is-set-exrc-dangerous
 set noexrc
+" https://vim.fandom.com/wiki/Modeline_magic
 set modeline
+" https://vim.fandom.com/wiki/Toggle_auto-indenting_for_code_paste
 set pastetoggle=<F2>
 
 set relativenumber  " set realtive numbers to show
 set number " also display the line number of the current line
 set numberwidth=5
 
+" https://vim.fandom.com/wiki/Searching#Case_sensitivity
 set ignorecase
 set smartcase
 
+" https://vim.fandom.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
 set scrolloff=4
+" http://vimcasts.org/episodes/soft-wrapping-text/
 set linebreak
 set nowrap
 if &diff
   set wrap
 endif
 
+" https://vim.fandom.com/wiki/Highlight_all_search_pattern_matches
 set hlsearch
-set gdefault
+" set gdefault
+" https://vim.fandom.com/wiki/Highlight_current_line
 set cursorline
-set colorcolumn=88,100,120
+" http://joshorourke.com/2012/06/29/vim-tip-how-to-use-vertical-guides
+set colorcolumn=88
 
+" https://medium.com/usevim/vim-101-set-hidden-f78800142855
 set hidden
+" Display a confirmation when closeing an unsaved file
 set confirm
+" http://vimdoc.sourceforge.net/htmldoc/options.html#'ttyfast'
 set ttyfast
 
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+" When shifting lines round the indentation to the nearest multiple of shiftwidth
 set shiftround
+" convert tabs to spaces
 set expandtab
+" https://vi.stackexchange.com/questions/5818/what-is-the-difference-between-autoindent-and-smartindent-in-vimrc
 set smartindent
-
+" https://vim.fandom.com/wiki/Disable_beeping`
 set visualbell
 
-set clipboard=unnamedplus
+" https://stackoverflow.com/questions/30691466/what-is-difference-between-vims-clipboard-unnamed-and-unnamedplus-settings
+" set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 
+" https://www.oreilly.com/library/view/learning-the-vi/9780596529833/ch15s05.html
 set backup
 set backupdir=~/.vim/vimscratch/backup//,$TEMP//,$TMP//
 
+" https://vi.stackexchange.com/questions/177/what-is-the-purpose-of-swap-files
 set swapfile
 set directory=~/.vim/vimscratch/swap//,$TEMP//,$TMP//
 
+" https://vi.stackexchange.com/questions/6/how-can-i-use-the-undofile
 set undofile
 set undodir=~/.vim/vimscratch/undo//,$TEMP//,$TMP//
 
+" https://vi.stackexchange.com/questions/10671/what-are-the-viminfo-and-netrwhist-files
 if !has('nvim')
   set viminfo+=n~/.cache/vim/viminfo
 else
   set viminfo+=n~/.cache/nvim/shada
 endif
 
-set noshowmode
+" https://vi.stackexchange.com/questions/20917/how-to-move-airline-status-bar-to-the-bottom-of-the-editor
+" set noshowmode
+" http://vimdoc.sourceforge.net/htmldoc/options.html#'conceallevel'
 set conceallevel=2
 
+" https://medium.com/usevim/understanding-listchars-acb9e5a90854
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<
 if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
   let &listchars="tab:\u25b8 ,trail:\u00b7,extends:\u00bb,precedes:\u00ab"
 endif
 set list
 
+"underscores also separate words
 set iskeyword-=_
 
+" https://stackoverflow.com/questions/11903889/how-to-not-get-special-characters-in-place-of-meta-key-combinations-for-vim-on-o
 if exists('+macmeta')
   set macmeta
 endif
 
 set background=dark
 
+" http://vimdoc.sourceforge.net/htmldoc/options.html#'guioptions'
 if has('gui_running')
   set guioptions-=T
   set guioptions-=t
   set guioptions-=m
   "colorscheme darcula
-  colorscheme onehalfdark
+  colorscheme dracula
   if has('gui_win32') || has('gui_win64')
     set guifont=Hasklug_NF:h14
     set clipboard=unnamed
@@ -148,6 +178,7 @@ endif
 " highlight CursorLine ctermbg=235 guibg=#353535
 
 " Setup mouse
+" https://medium.com/usevim/using-a-mouse-with-vim-44378f51f7d2
 if has('mouse')
   if !has('nvim')
     set ttymouse=xterm2
@@ -201,33 +232,33 @@ augroup END
 " Make zz be the same as 1z= (fix spelling with the first suggestion)
 nnoremap zz 1z=e
 
-" Mappings to manage vimrc
-nmap <leader>ev :e $MYVIMRC<CR>
-nmap <leader>eb :e ~/.vim/vimrc.bundles<CR>
-nmap <leader>sv :source $MYVIMRC<CR>
+" " Mappings to manage vimrc
+" nmap <leader>ev :e $MYVIMRC<CR>
+" nmap <leader>eb :e ~/.vim/vimrc.bundles<CR>
+" nmap <leader>sv :source $MYVIMRC<CR>
 
-" Turn off highligting
-nnoremap <leader>n :noh<CR>
-nnoremap <space>n :noh<CR>
+" " Turn off highligting
+" nnoremap <leader>n :noh<CR>
+" nnoremap <space>n :noh<CR>
 
-" Map space-<hjkl> to add a space or a line in that direction
-nmap <space>j ]<space>
-nmap <space>k [<space>
-nnoremap <space>h i<space><esc>
-nnoremap <space>l a<space><esc>
+" " Map space-<hjkl> to add a space or a line in that direction
+" nmap <space>j ]<space>
+" nmap <space>k [<space>
+" nnoremap <space>h i<space><esc>
+" nnoremap <space>l a<space><esc>
 
-" Mapping to close quickfix or location list windows
-nmap <silent> <leader>c :bufdo if &buftype == "quickfix" <bar><bar> &buftype == "locationlist" <bar> bdelete <bar> endif<CR>
+" " Mapping to close quickfix or location list windows
+" nmap <silent> <leader>c :bufdo if &buftype == "quickfix" <bar><bar> &buftype == "locationlist" <bar> bdelete <bar> endif<CR>
 
-" Map lk to be another version of escape in insert and command mode
-if has('gui_running')
-  inoremap lk <esc>
-  cnoremap lk <esc>
-else
-  set <F13>=lk
-  inoremap <F13> <esc>
-  cnoremap <F13> <esc>
-endif
+" " Map lk to be another version of escape in insert and command mode
+" if has('gui_running')
+"   inoremap lk <esc>
+"   cnoremap lk <esc>
+" else
+"   set <F13>=lk
+"   inoremap <F13> <esc>
+"   cnoremap <F13> <esc>
+" endif
 
 " :w!! to save a file as sudo when you forgot to open the file as sudo
 command WriteSudo w !sudo tee % > /dev/null
