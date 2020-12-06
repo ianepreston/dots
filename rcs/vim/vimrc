@@ -140,12 +140,12 @@ else
   endif
 
   "colorscheme darcula
-  colorscheme onehalfdark
+  colorscheme dracula
 endif
 
 " Darcula doesn't have a ColorColumn
-highlight ColorColumn ctermbg=235 guibg=#353535
-highlight CursorLine ctermbg=235 guibg=#353535
+" highlight ColorColumn ctermbg=235 guibg=#353535
+" highlight CursorLine ctermbg=235 guibg=#353535
 
 " Setup mouse
 if has('mouse')
